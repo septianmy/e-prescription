@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cuteeth Dental Therapist | System</title>
+    <title>E-Prescription</title>
 
     <link rel="icon" href="{{ asset('dist/favicon.ico') }}" type="image/gif" sizes="16x16">
     <!-- Google Font: Source Sans Pro -->
