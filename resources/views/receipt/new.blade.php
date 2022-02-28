@@ -1,3 +1,7 @@
+<?php 
+use App\Http\Controllers\PrescriptionController;
+?>
+
 @extends('layout.app')
 @section('content')
 <div class="content-wrapper">
@@ -86,7 +90,7 @@
                     </div>
                 </div>
             </div>
-            <h6>List Obat</h6>
+            <h5>List Obat</h5>
             <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
@@ -104,10 +108,11 @@
                   <th scope="row">{{ $loop->iteration }}</th>
                   @if($data->obatalkes_nama != null)
                     <td>{{ $data->obatalkes_nama }}</td>
+                    <td>{{ $data->qty }}</td>
                   @elseif($data->nama_racikan != null)
                   <td>{{ $data->nama_racikan }}</td>
+                  <td>1</td>
                   @endif
-                  <td>{{ $data->qty }}</td>
                   <td>{{ $data->signa_nama }}</td>
                   @if($data->obatalkes_nama != null)
                     <td>Non Racikan</td>
@@ -122,6 +127,19 @@
                   </form>
                   </td>
                 </tr>
+                @if($data->nama_racikan != null)
+                          @php
+                          $detailRacikan = PrescriptionController::getDetailRacikan($data->id_racikan);
+                          @endphp
+                          @foreach($detailRacikan as $data)
+                          <tr>
+                             <td></td>
+                             <td colspan=5>
+                               - <i>{{ $data->obatalkes_nama}}</i>
+                             </td>
+                          </tr>
+                          @endforeach
+                        @endif
                 @endforeach
                 </tbody>
             </table>

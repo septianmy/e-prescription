@@ -1,3 +1,8 @@
+
+<?php 
+use App\Http\Controllers\PrescriptionController;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -84,10 +89,12 @@
                           <th scope="row">{{ $loop->iteration }}</th>
                           @if($data->obatalkes_nama != null)
                             <td>{{ $data->obatalkes_nama }}</td>
+                            <td>{{ $data->qty }}</td>
                           @elseif($data->nama_racikan != null)
                           <td>{{ $data->nama_racikan }}</td>
+                          <td>1</td>
                           @endif
-                          <td>{{ $data->qty }}</td>
+                          
                           <td>{{ $data->signa_nama }}</td>
                           @if($data->obatalkes_nama != null)
                             <td>Non Racikan</td>
@@ -95,6 +102,19 @@
                           <td>Racikan</td>
                           @endif
                         </tr>
+                        @if($data->nama_racikan != null)
+                          @php
+                          $detailRacikan = PrescriptionController::getDetailRacikan($data->id_racikan);
+                          @endphp
+                          @foreach($detailRacikan as $data)
+                          <tr>
+                             <td></td>
+                             <td colspan=4>
+                               - <i>{{ $data->obatalkes_nama}}</i>
+                             </td>
+                          </tr>
+                          @endforeach
+                        @endif
                         @endforeach
                         </tbody>
                     </table>

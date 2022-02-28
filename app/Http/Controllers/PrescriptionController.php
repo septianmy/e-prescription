@@ -35,7 +35,7 @@ class PrescriptionController extends Controller {
         $dataObat = DataObat::get();
 
         $detailPrescription = DB::table('detail_prescription')
-            ->select('detail_prescription.id','obatalkes_m.obatalkes_nama','racikan.nama_racikan', 'detail_prescription.qty', 'signa_m.signa_nama')
+            ->select('detail_prescription.id','detail_prescription.id_racikan','obatalkes_m.obatalkes_nama','racikan.nama_racikan', 'detail_prescription.qty', 'signa_m.signa_nama')
             ->leftjoin('obatalkes_m', 'detail_prescription.id_obat', '=', 'obatalkes_m.obatalkes_id')
             ->leftjoin('signa_m', 'detail_prescription.id_signa', '=', 'signa_m.signa_id')
             ->leftjoin('racikan', 'detail_prescription.id_racikan', '=', 'racikan.id')
@@ -111,13 +111,28 @@ class PrescriptionController extends Controller {
         $namaPasien = $dataPrescription->patient_name;
         $datePrescription = $dataPrescription->created_at;
         $detailPrescription = DB::table('detail_prescription')
-            ->select('detail_prescription.id','obatalkes_m.obatalkes_nama','racikan.nama_racikan', 'detail_prescription.qty', 'signa_m.signa_nama')
+            ->select('detail_prescription.id','detail_prescription.id_racikan','obatalkes_m.obatalkes_nama','racikan.nama_racikan', 'detail_prescription.qty', 'signa_m.signa_nama')
             ->leftjoin('obatalkes_m', 'detail_prescription.id_obat', '=', 'obatalkes_m.obatalkes_id')
             ->leftjoin('signa_m', 'detail_prescription.id_signa', '=', 'signa_m.signa_id')
             ->leftjoin('racikan', 'detail_prescription.id_racikan', '=', 'racikan.id')
             ->where('detail_prescription.id_prescription', $idPrescription)
             ->get();
         return view('receipt.print', compact('detailPrescription','namaPasien','datePrescription'));
+    }
+
+    public static function getDetailRacikan($id){
+        $data = DB::table('detail_racikan')
+            ->select('obatalkes_m.obatalkes_nama')
+            ->leftjoin('obatalkes_m', 'detail_racikan.id_obat', '=', 'obatalkes_m.obatalkes_id')
+            ->where('detail_racikan.id_racikan', $id)
+            ->get();
+        return $data;
+    }
+
+    public function deletePrescription($id){
+        $delete = Prescription::find($id)->delete();
+
+        return Redirect::back(); 
     }
 
     public function deleteDetailPrescription($id){

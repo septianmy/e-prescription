@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Prescription extends Model
 {
+    use SoftDeletes;
 
     protected $fillable = [
         'patient_name',
@@ -14,4 +16,6 @@ class Prescription extends Model
     ];
 
     protected $table = 'prescription';
+
+    protected $dates = ['deleted_at'];
 }

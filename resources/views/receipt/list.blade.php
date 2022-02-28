@@ -37,10 +37,10 @@
                       <td>{{ $data->created_at }}</td>
                       <td>
                       <a class="btn btn-primary" href="/print-prescription/{{ $data->id }}" target="_blank">Print</a>
-                      <form action="/dataobat/delete/{{ $data->id }}" method="POST" style="margin-top: -38px; margin-left: 65px;">
-                        @method('delete')
+                      <form action="/delprescription/{{ $data->id }}" method="POST" style="margin-top: -38px; margin-left: 65px;">
+                        @method('get')
                         @csrf
-                        <button type="submit" onclick="return confirm('Apakah anda yakin ingin menghapus resep {{ $data->patien_name }}')" class="btn btn-danger deleteBooking">Remove</button>
+                        <button type="submit" onclick="return confirm('Apakah anda yakin ingin menghapus resep {{ $data->patient_name }}')" class="btn btn-danger deleteBooking">Remove</button>
                       </form>
                       </td>
                     </tr>
