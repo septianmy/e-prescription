@@ -67,12 +67,10 @@
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <div class="image">
-                        {{-- <img src="{{ asset('dist/cuteeth_logo.png') }}" alt="User Image"> --}}
+                    
+                    <div class="info">
+                        <h5><b>E-Prescription</b></h5>
                     </div>
-                    {{-- <div class="info">
-                        <a href="#" class="d-block"><b>Dental Clinic</b></a>
-                    </div> --}}
                 </div>
 
                 <!-- Sidebar Menu -->
